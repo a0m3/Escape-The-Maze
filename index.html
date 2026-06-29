@@ -8,15 +8,15 @@
     <link rel="stylesheet" href="./css/style.css">
     <script defer src="./javascript/app.js"></script>
     <style>
-@import url('https://fonts.googleapis.com/css2?family=Changa+One:ital@0;1&display=swap');
-</style>
+        @import url('https://fonts.googleapis.com/css2?family=Changa+One:ital@0;1&display=swap');
+    </style>
 </head>
 
 <body>
     <div id="main-menu">
         <h1 id="game-title">Escape The Maze</h1>
         <button id="start-btn" onclick="startGame()">Start</button>
-        <button id="setting-btn" onclick="settingButtonElement()">Setting</button>
+        <button id="setting-btn">Setting</button>
     </div>
 
     <div id="setting-menu">
@@ -29,12 +29,18 @@
     </div>
 
     <div id="maze-container">
-        <div id="maze"></div>
+        
         <div id="player"></div>
+        <div id="top-menu">
+            <h1 id="level-title">Level 1</h1>
+            <h1 id="timer">Timer: </h1>
+        </div>
+        <div id="maze"></div>
+
     </div>
 
 
-    
+
 
 
 </body>
