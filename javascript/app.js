@@ -12,7 +12,7 @@ const nextLvlBtnElement = document.querySelector('#nextLevelBtn')
 const tryAgainBtnElement = document.querySelector('#tryAgainBtn')
 const timeOutElement = document.querySelector('#timeout')
 const timeElement = document.querySelector('#timer')
-
+const exitBtn = document.querySelector('#exitBtn')
 /*-------------------------------- Constants --------------------------------*/
 
 
@@ -197,7 +197,7 @@ function renderLevel(levelData) {
 function startGame() {
     mainMenuElement.style.display = 'none'
     mazePageElement.style.display = 'block'
-    level = 4
+    level = 0
     loadLevel(level)
 }
 
@@ -273,6 +273,13 @@ function nextLevel() {
 }
 
 
+function exit(){
+    mainMenuElement.style.display = 'flex'
+    mazePageElement.style.display = 'none'
+}
+
+
+
 /*----------------------------- Event Listeners -----------------------------*/
 
 startElement.addEventListener('click', startGame)
@@ -280,3 +287,4 @@ settingButtonElement.addEventListener('click', showSetting)
 document.addEventListener('keydown', movePlayer)
 tryAgainBtnElement.addEventListener('click', tryAgain)
 nextLvlBtnElement.addEventListener('click', nextLevel)    
+exitBtn.addEventListener('click', exit)
