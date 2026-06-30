@@ -38,19 +38,19 @@ const level2 = [
     "#P..#.......#.....#",
     "###.#.#######.###.#",
     "#...#.#...#...#...#",
-    "#.###.#.#.###.###.#",
-    "#.#...#.#.#...#...#",
-    "#.#.###.#.#.#######",
+    "#.###...#.###.###.#",
+    "#.#...#.###...#...#",
+    "#.#.###.#.#.###.###",
     "#.#.#...#.#.#.....#",
     "#.#.#.###.#.#.###.#",
-    "#.#.#.#...#.#.#.#.#",
-    "#.#.#.#.###.###.#.#",
+    "#.#.#.#.....#.#.#.#",
+    "#.#.#.#.#####.#.#.#",
     "#...#.#.#...#...#.#",
     "#####.#.#.###.###.#",
     "#.....#.#.#...#...#",
     "#.#####.#.#.#######",
     "#.#.....#.#.......#",
-    "#.#.#######.#####.#",
+    "#.#.#####.#.#######",
     "#.........#.......E",
     "###################"
 ]
@@ -140,13 +140,14 @@ function renderLevel(levelData) {
 function startGame() {
     mainMenuElement.style.display = 'none'
     mazePageElement.style.display = 'block'
-    level = 0
+    level = 1
     loadLevel(level)
 }
 
 function loadLevel(levelIndex){
     currentMaze = levels[levelIndex].map(row => row.split(''))
     win = false
+    mazeLevelElement.textContent = 'level ' + (levelIndex+1)
     renderLevel(currentMaze)
 }
 
@@ -197,7 +198,12 @@ loadLevel(level)
 
 function nextLevel(){
 winPopUpElement.style.display='none'
-levels++
+level++
+
+if(level >= levels.length){
+    return
+}
+loadLevel(level)
 }
 
 
