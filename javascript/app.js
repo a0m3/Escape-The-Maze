@@ -8,7 +8,7 @@ const mazePageElement = document.querySelector('#maze-container')
 const mazeLevelElement = document.querySelector('#level-title')
 const mazeElement = document.querySelector('#maze')
 const winPopUpElement = document.querySelector('#win-popup')
-const nextLvlBtnElement= document.querySelector('#nextLevelBtn')
+const nextLvlBtnElement = document.querySelector('#nextLevelBtn')
 const tryAgainBtnElement = document.querySelector('#tryAgainBtn')
 
 /*-------------------------------- Constants --------------------------------*/
@@ -58,28 +58,55 @@ const level2 = [
 const level3 = [
     "#####################",
     "#P..#.......#.......#",
-    "###.#.#######.#######",
+    "###.#.#######.#####.#",
     "#...#.#...#...#.....#",
-    "#.###.#.#.###.###.###",
-    "#.#...#.#.#...#...#.#",
+    "#.###...#.###.###.#.#",
+    "#.....#.#.#...#...#.#",
     "#.#.###.#.#.###.###.#",
     "#.#.#...#.#.#...#...#",
     "#.#.#.###.#.#.#######",
     "#.#.#.#...#.#.#.....#",
-    "#.###.#.###.#.#.###.#",
+    "#.###.#.###.#...###.#",
     "#...#.#...#.#.#.#...#",
-    "###.#.###.#.###.#.###",
-    "#...#.#...#.#...#.#.#",
+    "###.#.###.#.###.#.#.#",
+    "#...###...#.#...#.#.#",
     "#.###.#.###.#.###.#.#",
-    "#.#...#.#...#.#...#.#",
+    "#.#...#.....#.#...#.#",
     "#.#.###.#.###.#.#####",
-    "#.#.....#...#.#.....#",
+    "#.#.....#.#.#.#.....#",
     "#.#########.#.#####.#",
-    "#...........#.......E",
+    "#...........#.....#.E",
     "#####################"
 ]
 
-const levels = [level1,level2,level3]
+const level4 = [
+    "######################",
+    "#P..#.......#........#",
+    "###.#.#######.###.####",
+    "#...#.#...#...#......#",
+    "#.#.#.#.#.###.###.####",
+    "#.#...#.#.#...#......#",
+    "#.#.###.#...###.####.#",
+    "#.#.#...###.#...#....#",
+    "#.#.#.###.#.#.########",
+    "#.#.#.#...#.#.#......#",
+    "#.###.#.#####.#.###.##",
+    "#...#.#...#.#...#....#",
+    "###.#.###.#.###.#.##.#",
+    "#...#.#...#.#...#.#..#",
+    "#.###.#.###.#.###.#..#",
+    "#.#...#.#...#.#...#..#",
+    "#.#.###.#.###.#.######",
+    "#.#.........#.#......#",
+    "#.#########.#.######.#",
+    "#.#.....#...#...#.#..#",
+    "#...........#...#....E",
+    "######################"
+]
+
+
+
+const levels = [level1, level2, level3, level4]
 
 /*---------------------------- Variables (state) ----------------------------*/
 
@@ -140,14 +167,14 @@ function renderLevel(levelData) {
 function startGame() {
     mainMenuElement.style.display = 'none'
     mazePageElement.style.display = 'block'
-    level = 1
+    level = 0
     loadLevel(level)
 }
 
-function loadLevel(levelIndex){
+function loadLevel(levelIndex) {
     currentMaze = levels[levelIndex].map(row => row.split(''))
     win = false
-    mazeLevelElement.textContent = 'level ' + (levelIndex+1)
+    mazeLevelElement.textContent = 'level ' + (levelIndex + 1)
     renderLevel(currentMaze)
 }
 
@@ -173,12 +200,12 @@ function movePlayer(e) {
 
     if (target === '#') return
 
-if(target === 'E'){
-    winLevel()
-    return
-}
+    if (target === 'E') {
+        winLevel()
+        return
+    }
 
-    currentMaze[row][col] = '.'  
+    currentMaze[row][col] = '.'
     currentMaze[newRow][newCol] = 'P'
 
     renderLevel(currentMaze)
@@ -187,23 +214,23 @@ if(target === 'E'){
 
 
 
-function winLevel(){
-    winPopUpElement.style.display='flex'
+function winLevel() {
+    winPopUpElement.style.display = 'flex'
 }
 
-function tryAgain(){
-winPopUpElement.style.display='none'
-loadLevel(level)
+function tryAgain() {
+    winPopUpElement.style.display = 'none'
+    loadLevel(level)
 }
 
-function nextLevel(){
-winPopUpElement.style.display='none'
-level++
+function nextLevel() {
+    winPopUpElement.style.display = 'none'
+    level++
 
-if(level >= levels.length){
-    return
-}
-loadLevel(level)
+    if (level >= levels.length) {
+        return
+    }
+    loadLevel(level)
 }
 
 
