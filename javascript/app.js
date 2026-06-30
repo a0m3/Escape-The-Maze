@@ -7,8 +7,12 @@ const settingMenuElement = document.querySelector('#setting-menu')
 const mazePageElement = document.querySelector('#maze-container')
 const mazeLevelElement = document.querySelector('#level-title')
 const mazeElement = document.querySelector('#maze')
+const winPopUpElement = document.querySelector('#win-popup')
+const nextLvlBtnElement= document.querySelector('#nextLevelBtn')
+const tryAgainBtnElement = document.querySelector('#tryAgainBtn')
 
 /*-------------------------------- Constants --------------------------------*/
+
 
 
 const level1 = [
@@ -29,7 +33,53 @@ const level1 = [
     "################"
 ]
 
+const level2 = [
+    "###################",
+    "#P..#.......#.....#",
+    "###.#.#######.###.#",
+    "#...#.#...#...#...#",
+    "#.###.#.#.###.###.#",
+    "#.#...#.#.#...#...#",
+    "#.#.###.#.#.#######",
+    "#.#.#...#.#.#.....#",
+    "#.#.#.###.#.#.###.#",
+    "#.#.#.#...#.#.#.#.#",
+    "#.#.#.#.###.###.#.#",
+    "#...#.#.#...#...#.#",
+    "#####.#.#.###.###.#",
+    "#.....#.#.#...#...#",
+    "#.#####.#.#.#######",
+    "#.#.....#.#.......#",
+    "#.#.#######.#####.#",
+    "#.........#.......E",
+    "###################"
+]
 
+const level3 = [
+    "#####################",
+    "#P..#.......#.......#",
+    "###.#.#######.#######",
+    "#...#.#...#...#.....#",
+    "#.###.#.#.###.###.###",
+    "#.#...#.#.#...#...#.#",
+    "#.#.###.#.#.###.###.#",
+    "#.#.#...#.#.#...#...#",
+    "#.#.#.###.#.#.#######",
+    "#.#.#.#...#.#.#.....#",
+    "#.###.#.###.#.#.###.#",
+    "#...#.#...#.#.#.#...#",
+    "###.#.###.#.###.#.###",
+    "#...#.#...#.#...#.#.#",
+    "#.###.#.###.#.###.#.#",
+    "#.#...#.#...#.#...#.#",
+    "#.#.###.#.###.#.#####",
+    "#.#.....#...#.#.....#",
+    "#.#########.#.#####.#",
+    "#...........#.......E",
+    "#####################"
+]
+
+const levels = [level1,level2,level3]
 
 /*---------------------------- Variables (state) ----------------------------*/
 
@@ -37,20 +87,20 @@ let level = 1
 let timer = 30
 let win = false
 const tileSize = 22
+let playerRow
+let PlayerCol
+let currentMaze = []
 
 /*-------------------------------- Functions --------------------------------*/
 
-function startGame() {
-    mainMenuElement.style.display = 'none'
-    mazePageElement.style.display = 'block'
-
-    renderLevel(level1)
-}
 
 function showSetting() {
     mainMenuElement.style.display = 'none'
     settingMenuElement.style.display = 'block'
 }
+
+
+
 
 function renderLevel(levelData) {
     mazeElement.innerHTML = ""
@@ -87,9 +137,74 @@ function renderLevel(levelData) {
 
 }
 
+function startGame() {
+    mainMenuElement.style.display = 'none'
+    mazePageElement.style.display = 'block'
+    level = 0
+    loadLevel(level)
+}
+
+function loadLevel(levelIndex){
+    currentMaze = levels[levelIndex].map(row => row.split(''))
+    win = false
+    renderLevel(currentMaze)
+}
+
+function findPlayer(maze) {
+    for (let r = 0; r < maze.length; r++) {
+        for (let c = 0; c < maze[r].length; c++) {
+            if (maze[r][c] === 'P') return { row: r, col: c }
+        }
+    }
+}
+
+function movePlayer(e) {
+    const { row, col } = findPlayer(currentMaze)
+
+    let newRow = row
+    let newCol = col
+
+    if (e.key === 'ArrowUp') newRow--
+    if (e.key === 'ArrowDown') newRow++
+    if (e.key === 'ArrowLeft') newCol--
+    if (e.key === 'ArrowRight') newCol++
+    const target = currentMaze[newRow][newCol]
+
+    if (target === '#') return
+
+if(target === 'E'){
+    winLevel()
+    return
+}
+
+    currentMaze[row][col] = '.'  
+    currentMaze[newRow][newCol] = 'P'
+
+    renderLevel(currentMaze)
+}
+
+
+
+
+function winLevel(){
+    winPopUpElement.style.display='flex'
+}
+
+function tryAgain(){
+winPopUpElement.style.display='none'
+loadLevel(level)
+}
+
+function nextLevel(){
+winPopUpElement.style.display='none'
+levels++
+}
 
 
 /*----------------------------- Event Listeners -----------------------------*/
 
 startElement.addEventListener('click', startGame)
 settingButtonElement.addEventListener('click', showSetting)
+document.addEventListener('keydown', movePlayer)
+tryAgainBtnElement.addEventListener('click', tryAgain)
+nextLvlBtnElement.addEventListener('click', nextLevel)    
