@@ -9,7 +9,7 @@
 
 Maze Escape Game is a simple browser game built using HTML, CSS, and JavaScript. The goal is to move through different maze levels and reach the exit while avoiding walls and completing each level as fast as possible.
 
-The game has 6 levels with increasing difficulty, a timer for each level, and a light/dark mode option in the settings to improve the player experience.
+The game has 5 levels with increasing difficulty, a timer for each level, and a light/dark mode option in the settings to improve the player experience.
 
 ## User Stories
 

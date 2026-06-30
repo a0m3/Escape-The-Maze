@@ -10,6 +10,8 @@ const mazeElement = document.querySelector('#maze')
 const winPopUpElement = document.querySelector('#win-popup')
 const nextLvlBtnElement = document.querySelector('#nextLevelBtn')
 const tryAgainBtnElement = document.querySelector('#tryAgainBtn')
+const timeOutElement = document.querySelector('#timeout')
+const timeElement = document.querySelector('#timer')
 
 /*-------------------------------- Constants --------------------------------*/
 
@@ -48,8 +50,8 @@ const level2 = [
     "#...#.#.#...#...#.#",
     "#####.#.#.###.###.#",
     "#.....#.#.#...#...#",
-    "#.#####.#.#.#######",
-    "#.#.....#.#.......#",
+    "#.#####.#.#.#####.#",
+    "#.#.....#.#.#.....#",
     "#.#.#####.#.#######",
     "#.........#.......E",
     "###################"
@@ -106,21 +108,21 @@ const level4 = [
 
 const level5 = [
     "########################",
-    "#P..#......#...........#",
+    "#P..#......#....#......#",
     "###.#.####.#.#########.#",
     "#...#.#..#.#.#...#...#.#",
     "#.###.##.#.#.#.#####.#.#",
     "#.#......#...#.#...#.#.#",
     "#.#.##########.#.#.#.#.#",
-    "#...#..........#.#.#.#.#",
+    "#...#..........#.#...#.#",
     "#.#.#.##########.###.#.#",
     "#.#.#.#............#.#.#",
     "#.#.#.###.########.#.#.#",
-    "#.#..........#.....#...#",
-    "###.########.#.#########",
+    "#.#...#......#.....#...#",
+    "###.########.#.######.##",
     "#..........#.#.#.......#",
     "#.####.###.#.#.#.#####.#",
-    "#.#....#.#.#.#...#...#.#",
+    "#.#....#.#.#.#.#.#...#.#",
     "#.#.####.#.#.#####.#.#.#",
     "#.#......#.#.......#.#.#",
     "#.########.#########.#.#",
@@ -132,18 +134,20 @@ const level5 = [
 ]
 
 
-const levels = [level1, level2, level3, level4,level5]
+const levels = [level1, level2, level3, level4, level5]
+
+const levelTimes = [25, 35, 40, 40, 40]
 
 /*---------------------------- Variables (state) ----------------------------*/
 
-let level = 1
-let timer = 30
+
 let win = false
 const tileSize = 22
 let playerRow
 let PlayerCol
 let currentMaze = []
-
+let time = 0
+let timeInterval = null
 /*-------------------------------- Functions --------------------------------*/
 
 
@@ -193,7 +197,7 @@ function renderLevel(levelData) {
 function startGame() {
     mainMenuElement.style.display = 'none'
     mazePageElement.style.display = 'block'
-    level = 0
+    level = 4
     loadLevel(level)
 }
 
@@ -241,11 +245,20 @@ function movePlayer(e) {
 
 
 function winLevel() {
+
+    if (level + 1 >= levels.length) {
+        nextLvlBtnElement.style.display = 'none'
+    }
     winPopUpElement.style.display = 'flex'
+}
+
+function timeout() {
+    timeOutElement.style.display = 'flex'
 }
 
 function tryAgain() {
     winPopUpElement.style.display = 'none'
+    timeOutElement.style.display = 'none'
     loadLevel(level)
 }
 
