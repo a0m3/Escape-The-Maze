@@ -206,7 +206,7 @@ function startGame() {
     mazePageElement.style.display = 'block'
     winPopUpElement.style.display = 'none'
     timeOutElement.style.display = 'none'
-    level = 4
+    level = 0
     time = levelTimes[levelCurrent]
     loadLevel(level)
 }
@@ -262,13 +262,17 @@ function winLevel() {
         nextLvlBtnElement.style.display = 'none'
     }
     clearInterval(intervalValue)
+
+    const { row, col } = findPlayer(currentMaze)
+    currentMaze[row][col] = '.'
+    renderLevel(currentMaze)
     winPopUpElement.style.display = 'flex'
 }
 
 function timeout() {
     const { row, col } = findPlayer(currentMaze)
     currentMaze[row][col] = '.'
-renderLevel(currentMaze)
+    renderLevel(currentMaze)
     timeOutElement.style.display = 'flex'
 }
 
