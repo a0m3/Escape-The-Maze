@@ -83,6 +83,13 @@ button:hover {
     transition: .4s;
 }
 
+#darkmode-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; 
+    align-items: center;
+}
+
 /* The switch - the box around the slider */
 .switch {
   position: relative;
@@ -167,6 +174,7 @@ input:checked + .slider:before {
 display: flex;
 flex-direction: row;
 justify-content: space-between;
+align-items: center;
 
 }
 
