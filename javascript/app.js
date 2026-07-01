@@ -13,6 +13,8 @@ const tryAgainBtnElement = document.querySelector('#tryAgainBtn')
 const timeOutElement = document.querySelector('#timeout')
 const timeElement = document.querySelector('#timer')
 const exitBtn = document.querySelector('#exitBtn')
+const exitBtn2 = document.querySelector('#exitBtn2')
+const tryAgainBtnElement2 = document.querySelector('#tryAgainBtn2')
 /*-------------------------------- Constants --------------------------------*/
 
 
@@ -147,8 +149,8 @@ let playerRow
 let PlayerCol
 let currentMaze = []
 let levelCurrent = 0
-let timeInterval = null
-let intervalValue
+let intervalValue = null
+let time = 0
 /*-------------------------------- Functions --------------------------------*/
 
 
@@ -199,7 +201,7 @@ function startGame() {
     mainMenuElement.style.display = 'none'
     mazePageElement.style.display = 'block'
     level = 0
-    time = levelTimes[level]
+    time = levelTimes[levelCurrent]
     loadLevel(level)
 }
 
@@ -296,9 +298,7 @@ function startTimer() {
             timeout()
         }
 
-        if(win === true){
-
-        }
+      
     }, 1000)
 }
 
@@ -311,3 +311,5 @@ document.addEventListener('keydown', movePlayer)
 tryAgainBtnElement.addEventListener('click', tryAgain)
 nextLvlBtnElement.addEventListener('click', nextLevel)
 exitBtn.addEventListener('click', exit)
+exitBtn2.addEventListener('click', exit)
+tryAgainBtnElement2.addEventListener('click', tryAgain)
