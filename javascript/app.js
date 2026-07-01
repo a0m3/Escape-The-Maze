@@ -146,8 +146,9 @@ const tileSize = 22
 let playerRow
 let PlayerCol
 let currentMaze = []
-let time = 0
+let levelCurrent = 0
 let timeInterval = null
+let intervalValue
 /*-------------------------------- Functions --------------------------------*/
 
 
@@ -198,6 +199,7 @@ function startGame() {
     mainMenuElement.style.display = 'none'
     mazePageElement.style.display = 'block'
     level = 0
+    time = levelTimes[level]
     loadLevel(level)
 }
 
@@ -206,6 +208,7 @@ function loadLevel(levelIndex) {
     win = false
     mazeLevelElement.textContent = 'level ' + (levelIndex + 1)
     renderLevel(currentMaze)
+    startTimer(levelTimes[levelIndex])
 }
 
 function findPlayer(maze) {
@@ -249,6 +252,7 @@ function winLevel() {
     if (level + 1 >= levels.length) {
         nextLvlBtnElement.style.display = 'none'
     }
+    clearInterval(intervalValue)
     winPopUpElement.style.display = 'flex'
 }
 
@@ -259,6 +263,7 @@ function timeout() {
 function tryAgain() {
     winPopUpElement.style.display = 'none'
     timeOutElement.style.display = 'none'
+    time = levelTimes[level]
     loadLevel(level)
 }
 
@@ -273,11 +278,28 @@ function nextLevel() {
 }
 
 
-function exit(){
+function exit() {
     mainMenuElement.style.display = 'flex'
     mazePageElement.style.display = 'none'
 }
 
+
+function startTimer() {
+    clearInterval(intervalValue)
+    intervalValue = setInterval(() => {
+        time--
+        console.log(time)
+
+        if (time <= 0) {
+            clearInterval(intervalValue)
+            timeout()
+        }
+
+        if(win === true){
+
+        }
+    }, 1000)
+}
 
 
 /*----------------------------- Event Listeners -----------------------------*/
@@ -286,5 +308,5 @@ startElement.addEventListener('click', startGame)
 settingButtonElement.addEventListener('click', showSetting)
 document.addEventListener('keydown', movePlayer)
 tryAgainBtnElement.addEventListener('click', tryAgain)
-nextLvlBtnElement.addEventListener('click', nextLevel)    
+nextLvlBtnElement.addEventListener('click', nextLevel)
 exitBtn.addEventListener('click', exit)
