@@ -15,6 +15,8 @@ const timeElement = document.querySelector('#timer')
 const exitBtn = document.querySelector('#exitBtn')
 const exitBtn2 = document.querySelector('#exitBtn2')
 const tryAgainBtnElement2 = document.querySelector('#tryAgainBtn2')
+const darkModeElement = document.querySelector('.switch input[type="checkbox"]')
+const backBtnElement = document.querySelector('#back-btn')
 /*-------------------------------- Constants --------------------------------*/
 
 
@@ -293,7 +295,7 @@ function startTimer() {
     intervalValue = setInterval(() => {
         time--
         console.log(time)
-            timeElement.textContent = 'Timer: ' + time
+        timeElement.textContent = 'Timer: ' + time
 
 
         if (time <= 0) {
@@ -306,6 +308,15 @@ function startTimer() {
 }
 
 
+function darkmode() {
+    document.body.classList.toggle('dark-mode', darkModeElement.checked)
+}
+
+function backMain() {
+    settingMenuElement.style.display = 'none'
+    mainMenuElement.style.display = 'flex'
+}
+
 /*----------------------------- Event Listeners -----------------------------*/
 
 startElement.addEventListener('click', startGame)
@@ -316,3 +327,5 @@ nextLvlBtnElement.addEventListener('click', nextLevel)
 exitBtn.addEventListener('click', exit)
 exitBtn2.addEventListener('click', exit)
 tryAgainBtnElement2.addEventListener('click', tryAgain)
+darkModeElement.addEventListener('change', darkmode)
+backBtnElement.addEventListener('click', backMain)
