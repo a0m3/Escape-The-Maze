@@ -229,6 +229,16 @@ function findPlayer(maze) {
 }
 
 function movePlayer(e) {
+
+    if(currentMaze.length === 0){
+        return 
+    }
+
+    const player = findPlayer(currentMaze)
+    if(!player) return
+    
+    const {row, col} = player
+    
     const { row, col } = findPlayer(currentMaze)
 
     let newRow = row
