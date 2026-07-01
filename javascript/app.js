@@ -274,6 +274,7 @@ function nextLevel() {
     if (level >= levels.length) {
         return
     }
+    time = levelTimes[level]
     loadLevel(level)
 }
 
