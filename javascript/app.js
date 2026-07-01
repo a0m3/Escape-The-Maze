@@ -266,6 +266,9 @@ function winLevel() {
 }
 
 function timeout() {
+    const { row, col } = findPlayer(currentMaze)
+    currentMaze[row][col] = '.'
+renderLevel(currentMaze)
     timeOutElement.style.display = 'flex'
 }
 
