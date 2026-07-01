@@ -14,9 +14,11 @@ const timeOutElement = document.querySelector('#timeout')
 const timeElement = document.querySelector('#timer')
 const exitBtn = document.querySelector('#exitBtn')
 const exitBtn2 = document.querySelector('#exitBtn2')
+const exitBtn3 = document.querySelector('#exitGame')
 const tryAgainBtnElement2 = document.querySelector('#tryAgainBtn2')
 const darkModeElement = document.querySelector('.switch input[type="checkbox"]')
 const backBtnElement = document.querySelector('#back-btn')
+const playerElement = document.querySelector('.player')
 /*-------------------------------- Constants --------------------------------*/
 
 
@@ -113,7 +115,7 @@ const level4 = [
 const level5 = [
     "########################",
     "#P..#......#....#......#",
-    "###.#.####.#.#########.#",
+    "###.#.####.#.######.##.#",
     "#...#.#..#.#.#...#...#.#",
     "#.###.##.#.#.#.#####.#.#",
     "#.#......#...#.#...#.#.#",
@@ -121,7 +123,7 @@ const level5 = [
     "#...#..........#.#...#.#",
     "#.#.#.##########.###.#.#",
     "#.#.#.#............#.#.#",
-    "#.#.#.###.########.#.#.#",
+    "#.#.#.###.########.###.#",
     "#.#...#......#.....#...#",
     "###.########.#.######.##",
     "#..........#.#.#.......#",
@@ -202,7 +204,9 @@ function renderLevel(levelData) {
 function startGame() {
     mainMenuElement.style.display = 'none'
     mazePageElement.style.display = 'block'
-    level = 0
+    winPopUpElement.style.display = 'none'
+    timeOutElement.style.display = 'none'
+    level = 4
     time = levelTimes[levelCurrent]
     loadLevel(level)
 }
@@ -278,6 +282,7 @@ function nextLevel() {
 
     if (level >= levels.length) {
         return
+        winPopUpElement.style.display = 'none'
     }
     time = levelTimes[level]
     loadLevel(level)
@@ -317,6 +322,13 @@ function backMain() {
     mainMenuElement.style.display = 'flex'
 }
 
+function exitGame() {
+    clearInterval(intervalValue)
+    winPopUpElement.style.display = 'none'
+    timeOutElement.style.display = 'none'
+    mainMenuElement.style.display = 'flex'
+    mazePageElement.style.display = 'none'
+}
 /*----------------------------- Event Listeners -----------------------------*/
 
 startElement.addEventListener('click', startGame)
@@ -326,6 +338,7 @@ tryAgainBtnElement.addEventListener('click', tryAgain)
 nextLvlBtnElement.addEventListener('click', nextLevel)
 exitBtn.addEventListener('click', exit)
 exitBtn2.addEventListener('click', exit)
+exitBtn3.addEventListener('click', exitGame)
 tryAgainBtnElement2.addEventListener('click', tryAgain)
 darkModeElement.addEventListener('change', darkmode)
 backBtnElement.addEventListener('click', backMain)

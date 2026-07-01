@@ -240,7 +240,7 @@ justify-content: space-between;
 
 
 body.dark-mode {
-    background-color: #121212;
+    background-color: #2e2e2e;
     color: white;
 }
 
@@ -249,7 +249,7 @@ body.dark-mode #setting-menu,
 body.dark-mode #maze-container,
 body.dark-mode #win-popup,
 body.dark-mode #timeout {
-    background-color: #1e1e1e;
+    background-color: #454545;
     border-color: #444;
 }
 
