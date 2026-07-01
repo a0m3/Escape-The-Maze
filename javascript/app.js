@@ -209,6 +209,7 @@ function loadLevel(levelIndex) {
     currentMaze = levels[levelIndex].map(row => row.split(''))
     win = false
     mazeLevelElement.textContent = 'level ' + (levelIndex + 1)
+    timeElement.textContent = 'Timer: ' + time
     renderLevel(currentMaze)
     startTimer(levelTimes[levelIndex])
 }
@@ -292,13 +293,15 @@ function startTimer() {
     intervalValue = setInterval(() => {
         time--
         console.log(time)
+            timeElement.textContent = 'Timer: ' + time
+
 
         if (time <= 0) {
             clearInterval(intervalValue)
             timeout()
         }
 
-      
+
     }, 1000)
 }
 

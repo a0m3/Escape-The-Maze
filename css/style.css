@@ -83,6 +83,7 @@ button:hover {
     height: 200px;
     width: 180px;
     display: none;
+    transition: .4s;
 }
 
 /* The switch - the box around the slider */
@@ -162,6 +163,7 @@ input:checked + .slider:before {
     height: 600px;
     width: 800px;
     display: none;
+    transition: .4s ease;
 }
 
 #top-menu{
@@ -219,7 +221,7 @@ justify-content: space-between;
     border: solid black 3px;
     border-radius: 10px;
     padding: 20px;
-    
+    transition: .4s ease;
 
 }
 
@@ -236,4 +238,7 @@ justify-content: space-between;
     border: solid black 3px;
     border-radius: 10px;
     padding: 20px;
+    transition: .4s ease;
 }
+
+
