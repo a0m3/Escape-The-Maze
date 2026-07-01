@@ -24,12 +24,14 @@ The game has 5 levels with increasing difficulty, a timer for each level, and a 
 
 ## Screenshots
 
-
-
+![Main Page](image.png)
+![Setting Menu](image-1.png)
+![The Game](image-2.png)
 
 
 ## Future Enhancements
-
+- Add more levels to the game
+- Improve the design of the game
 
 ## Credits
 
