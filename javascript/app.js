@@ -230,16 +230,15 @@ function findPlayer(maze) {
 
 function movePlayer(e) {
 
-    if(currentMaze.length === 0){
-        return 
+    if (currentMaze.length === 0) {
+        return
     }
 
     const player = findPlayer(currentMaze)
-    if(!player) return
-    
-    const {row, col} = player
-    
-    const { row, col } = findPlayer(currentMaze)
+    if (!player) return
+
+    const { row, col } = player
+
 
     let newRow = row
     let newCol = col
